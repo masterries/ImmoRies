@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/immories/static/css/main.88cf321f.css",
+    "main.js": "/immories/static/js/main.20e9a4ed.js",
+    "index.html": "/immories/index.html",
+    "main.88cf321f.css.map": "/immories/static/css/main.88cf321f.css.map",
+    "main.20e9a4ed.js.map": "/immories/static/js/main.20e9a4ed.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.88cf321f.css",
+    "static/js/main.20e9a4ed.js"
+  ]
+}
