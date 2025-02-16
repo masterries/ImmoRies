@@ -1,4 +1,3 @@
-// src/components/MenuBar.js
 import React from "react";
 import {
   AppBar,
@@ -27,10 +26,14 @@ const MenuBar = ({
   const soldOptions = ["sold", "unsold", "both"];
   const displayModes = [
     { value: "immo", label: "Display Immo Raster" },
+    { value: "time_to_close", label: "Display Time to Close" },
     { value: "public_transport", label: "Display Public Transport" },
     { value: "car", label: "Display Car Raster" },
     { value: "other", label: "Other Mode" },
   ];
+
+  // Determine if sold status should be shown (hide for time_to_close mode)
+  const showSoldStatus = displayMode !== "time_to_close";
 
   return (
     <AppBar position="static">
@@ -38,6 +41,7 @@ const MenuBar = ({
         <Typography variant="h6" sx={{ flexGrow: 1 }}>
           FastAPI Athome Dashboard
         </Typography>
+        
         {/* Year Dropdown */}
         <FormControl size="small" sx={{ m: 1, minWidth: 120 }}>
           <InputLabel id="year-label">Year</InputLabel>
@@ -72,22 +76,24 @@ const MenuBar = ({
           </Select>
         </FormControl>
 
-        {/* Sold Dropdown */}
-        <FormControl size="small" sx={{ m: 1, minWidth: 120 }}>
-          <InputLabel id="sold-label">Sold Status</InputLabel>
-          <Select
-            labelId="sold-label"
-            value={sold}
-            label="Sold Status"
-            onChange={(e) => setSold(e.target.value)}
-          >
-            {soldOptions.map((opt) => (
-              <MenuItem key={opt} value={opt}>
-                {opt}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        {/* Sold Dropdown - Only show if not in time_to_close mode */}
+        {showSoldStatus && (
+          <FormControl size="small" sx={{ m: 1, minWidth: 120 }}>
+            <InputLabel id="sold-label">Sold Status</InputLabel>
+            <Select
+              labelId="sold-label"
+              value={sold}
+              label="Sold Status"
+              onChange={(e) => setSold(e.target.value)}
+            >
+              {soldOptions.map((opt) => (
+                <MenuItem key={opt} value={opt}>
+                  {opt}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        )}
 
         {/* Display Mode Buttons */}
         <Box sx={{ m: 1 }}>
@@ -96,7 +102,11 @@ const MenuBar = ({
               key={mode.value}
               color={displayMode === mode.value ? "secondary" : "inherit"}
               onClick={() => setDisplayMode(mode.value)}
-              sx={{ m: 0.5 }}
+              sx={{ 
+                m: 0.5,
+                textTransform: 'none',  // Prevents all-caps
+                whiteSpace: 'nowrap'    // Prevents text wrapping
+              }}
             >
               {mode.label}
             </Button>

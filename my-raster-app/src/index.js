@@ -1,15 +1,14 @@
 // src/index.js
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import AppRoutes from "./Routes";
-import "./index.css"; // optional global CSS
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { HashRouter as Router } from 'react-router-dom';
+import AppRoutes from './Routes';
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <Router>
       <AppRoutes />
-    </BrowserRouter>
+    </Router>
   </React.StrictMode>
 );
